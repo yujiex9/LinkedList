@@ -73,27 +73,24 @@ class LinkedList:
       prev_node.next_node = _node.next_node
 
 
+  def remove_duplicates(self):
+    # (i/o/p)c -> (inner/outer/prev) curosr
+    oc = self.head
+    while oc.next_node:
+      pc, ic = oc, oc.next_node
+      while ic:
+        if ic == oc:
+          pc.next_node = ic.next_node
+        else:
+          pc = pc.next_node
+        ic = ic.next_node
+      oc = oc.next_node
+
+
   def reverse(self):
     if not self.head or not self.head.next_node:
       return
 
-    # I ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # cursor = self.head
-    # next_cursor = cursor.next_node
-    # cursor.next_node = None
-    # prev_cursor = cursor
-    # cursor = next_cursor
-    #
-    # while cursor.next_node:
-    #   next_cursor = cursor.next_node
-    #   cursor.next_node = prev_cursor
-    #   prev_cursor = cursor
-    #   cursor = next_cursor
-    #
-    # self.head = cursor
-    # cursor.next_node = prev_cursor
-
-    # II ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     cursor = self.head.next_node
     self.head.next_node = None
 
