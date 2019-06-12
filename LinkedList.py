@@ -9,18 +9,40 @@ class Node:
 
 
 class LinkedList:
-  def __init__(self, head=None):
-    self.head = head
+  def __init__(self):
+    self.head = None
+
+
+  def __contains__(self, node):
+    found = False
+    if self.head:
+      cursor = self.head
+      while cursor:
+        if cursor == node:
+          found = True
+          break
+        cursor = cursor.next_node
+    return found
+
+
+  def __len__(self):
+    cnt = 0
+    if self.head:
+      cursor = self.head
+      while cursor:
+        cnt += 1
+        cursor = cursor.next_node
+    return cnt
 
 
   def append(self, node):
     if not self.head:
       self.head = node
       return
-    cursor_node = self.head
-    while cursor_node.next_node:
-      cursor_node = cursor_node.next_node
-    cursor_node.next_node = node
+    cursor = self.head
+    while cursor.next_node:
+      cursor = cursor.next_node
+    cursor.next_node = node
 
 
   def insert(self, flag_node, node):
@@ -51,8 +73,39 @@ class LinkedList:
       prev_node.next_node = _node.next_node
 
 
+  def reverse(self):
+    if not self.head or not self.head.next_node:
+      return
+
+    # I ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # cursor = self.head
+    # next_cursor = cursor.next_node
+    # cursor.next_node = None
+    # prev_cursor = cursor
+    # cursor = next_cursor
+    #
+    # while cursor.next_node:
+    #   next_cursor = cursor.next_node
+    #   cursor.next_node = prev_cursor
+    #   prev_cursor = cursor
+    #   cursor = next_cursor
+    #
+    # self.head = cursor
+    # cursor.next_node = prev_cursor
+
+    # II ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    cursor = self.head.next_node
+    self.head.next_node = None
+
+    while cursor:
+      next_cursor = cursor.next_node
+      cursor.next_node = self.head
+      self.head = cursor
+      cursor = next_cursor
+
+
   def print_list(self):
-    cursor_node = self.head
-    while cursor_node:
-      print(cursor_node.value)
-      cursor_node = cursor_node.next_node
+    cursor = self.head
+    while cursor:
+      print(cursor.value)
+      cursor = cursor.next_node
