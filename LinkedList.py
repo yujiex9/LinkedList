@@ -91,6 +91,23 @@ class LinkedList:
     if not self.head or not self.head.next_node:
       return
 
+    # I ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # cursor = self.head
+    # next_cursor = cursor.next_node
+    # cursor.next_node = None
+    # prev_cursor = cursor
+    # cursor = next_cursor
+    #
+    # while cursor.next_node:
+    #   next_cursor = cursor.next_node
+    #   cursor.next_node = prev_cursor
+    #   prev_cursor = cursor
+    #   cursor = next_cursor
+    #
+    # self.head = cursor
+    # cursor.next_node = prev_cursor
+
+    # II ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     cursor = self.head.next_node
     self.head.next_node = None
 
